@@ -1,5 +1,5 @@
 (function() {
-var app = angular.module('myMarvel', ['ionic'])
+var app = angular.module('myMarvel', ['ionic','ionic-material'])
 
 app.controller('MarvelCtrl', function($http,$scope){
 
@@ -10,13 +10,12 @@ app.controller('MarvelCtrl', function($http,$scope){
 
   var url_base = 'http://gateway.marvel.com:80/v1/public/comics';
   var url_principal = url_base + '?ts='+ ts +'&apikey='+ PUBLIC_KEY +'&hash='+ hash +''
-
+  console.log(url_principal)
   $scope.comics = [];
 
   $http.get(url_principal)
     .success(function(response){
       angular.forEach(response.data.results, function(child){
-        console.log(child.description);
         $scope.comics.push(child);
       });
     });

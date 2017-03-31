@@ -16,7 +16,11 @@
       }
     </script>-->
 
+    <link href='https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic' rel='stylesheet' type='text/css'>
+
+
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -25,6 +29,7 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -36,12 +41,43 @@
   <body ng-app="myMarvel" ng-controller="MarvelCtrl">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
+      <ion-header-bar class="bar bar-header bar-positive">
         <h1 class="title">Ionic Blank Starter</h1>
       </ion-header-bar>
-      <ion-content>
-        <div ng-repeat="comic in comics">
-          {{comic.description}}
+      <ion-content class="cards-bg">
+        <div class="list" ng-repeat="comic in comics">
+          <ion-card>
+            <img ng-src="{{comic.images[0].path}}.{{comic.images[0].extension}}"/>
+            <ion-card-content>
+              <ion-card-title>
+                Nine inch nails live
+              </ion-card-title>
+              <p>
+              {{comic.description}}
+              </p>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-row no-padding>
+            <ion-col>
+              <button ion-button clear small color="danger" icon-left>
+                <ion-icon name='star'></ion-icon>
+                Favorite
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button clear small color="danger" icon-left>
+                <ion-icon name='musical-notes'></ion-icon>
+                Listen
+              </button>
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button clear small color="danger" icon-left>
+                <ion-icon name='share-alt'></ion-icon>
+                Share
+              </button>
+            </ion-col>
+          </ion-row>
         </div>
       </ion-content>
     </ion-pane>
