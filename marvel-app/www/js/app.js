@@ -1,11 +1,28 @@
-// Ionic Starter App
+(function() {
+var app = angular.module('myMarvel', ['ionic'])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+app.controller('MarvelCtrl', function($http,$scope){
 
-.run(function($ionicPlatform) {
+  var PRIV_KEY = "29bf991829ba2e685a2d2f4bbc6fcd84d60dd29b";
+  var PUBLIC_KEY = "7d230d5b17bc13d8f1f390973976bbe3";
+  var ts = new Date().getTime();
+  var hash = md5(ts + PRIV_KEY + PUBLIC_KEY).toString();
+
+  var url_base = 'http://gateway.marvel.com:80/v1/public/comics';
+  var url_principal = url_base + '?ts='+ ts +'&apikey='+ PUBLIC_KEY +'&hash='+ hash +''
+
+  $scope.comics = [];
+
+  $http.get(url_principal)
+    .success(function(response){
+      angular.forEach(response.data.results, function(child){
+        console.log(child.description);
+        $scope.comics.push(child);
+      });
+    });
+});
+
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -21,4 +38,6 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
+});
+
+}());
