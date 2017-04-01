@@ -1,0 +1,47 @@
+<ion-pane>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Ionic Blank Starter</h1>
+      </ion-header-bar>
+      <ion-content class="cards-bg">
+        <label class="item item-input">
+        <i class="icon icon-search placeholder-icon"></i>
+        <input type="search" placeholder="Buscar" ng-model="searchQuery">
+      </label>
+        <div class="list" ng-repeat="comic in comics | filter:searchQuery">
+          <ion-card>
+            <button class="btn btn-small btn-primary" ng-click="viewDetail(comic)">View Details...</button>
+            <h1>{{comic.title}}</h1>
+            <img ng-src="{{comic.images[0].path}}.{{comic.images[0].extension}}"/>
+            <ion-card-content>
+              <ion-card-title>
+                Nine inch nails live
+              </ion-card-title>
+              <p>
+              {{comic.description}}
+              </p>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-row no-padding>
+            <ion-col>
+              <button ion-button clear small color="danger" icon-left>
+                <ion-icon name='star'></ion-icon>
+                Favorite
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button clear small color="danger" icon-left>
+                <ion-icon name='musical-notes'></ion-icon>
+                Listen
+              </button>
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button clear small color="danger" icon-left>
+                <ion-icon name='share-alt'></ion-icon>
+                Share
+              </button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-content>
+    </ion-pane>
