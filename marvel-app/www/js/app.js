@@ -1,5 +1,5 @@
 (function() {
-var app = angular.module('myMarvel', ['ngRoute','ionic','ionic-material'])
+var app = angular.module('myMarvel', ['ngRoute','ngResource','ionic','ionic-material'])
 
 app.config(["$routeProvider",function($routeProvider){
 
@@ -13,25 +13,19 @@ app.config(["$routeProvider",function($routeProvider){
 
 }]);
 
-app.controller('MarvelCtrl', function($http,$scope,$location){
+app.factory('ComicService', function() {
+  return {
+       PRIV_KEY: '29bf991829ba2e685a2d2f4bbc6fcd84d60dd29b',
+       PUBLIC_KEY: '7d230d5b17bc13d8f1f390973976bbe3',
+       ts: new Date().getTime(),
+       url_base: 'http://gateway.marvel.com:80/v1/public/comics'
+  };
+});
 
-  //Private key generada a la cuenta de marvel
-  var PRIV_KEY = "29bf991829ba2e685a2d2f4bbc6fcd84d60dd29b";
+app.controller('MarvelCtrl', function($http,$scope,$location,ComicService){
 
-  //Public key generada a la cuenta de marvel
-  var PUBLIC_KEY = "7d230d5b17bc13d8f1f390973976bbe3";
-
-  //TimeStamp necesario para pasarlo como parametro en la URL
-  var ts = new Date().getTime();
-
-  //Parametro hash para pasar en la url
-  var hash = md5(ts + PRIV_KEY + PUBLIC_KEY).toString();
-
-  //Url base de los comics
-  var url_base = 'http://gateway.marvel.com:80/v1/public/comics';
-
-  //url principal la cual servira para poder consumir la api
-  var url_principal = url_base + '?ts='+ ts +'&apikey='+ PUBLIC_KEY +'&hash='+ hash +''
+  var hash = md5(ComicService.ts + ComicService.PRIV_KEY + ComicService.PUBLIC_KEY).toString();
+  var url_principal = ComicService.url_base + '?ts='+ ComicService.ts +'&apikey='+ ComicService.PUBLIC_KEY +'&hash='+ hash +''
   console.log(url_principal)
   $scope.comics = [];
 
@@ -48,12 +42,32 @@ app.controller('MarvelCtrl', function($http,$scope,$location){
   }
 });
 
-app.controller('MarvelDetail', function($http,$scope,$location){
+app.controller('MarvelDetail', [
+  "$scope","$http","$routeParams","$location","$resource","ComicService",
+  function($scope,$http,$routeParams,$location,$resource,ComicService){
 
-  $scope.backIndex = function() {
-    $location.path("/")
+    $scope.comicId = $routeParams.id;
+
+    var hash = md5(ComicService.ts + ComicService.PRIV_KEY + ComicService.PUBLIC_KEY).toString();
+
+    //url principal la cual servira para poder consumir la api
+    var url_principal = ComicService.url_base + "/" + $scope.comicId + '?ts='+ ComicService.ts +'&apikey='+ ComicService.PUBLIC_KEY +'&hash='+ hash +''
+    console.log(url_principal)
+    $scope.comic = [];
+
+    $http.get(url_principal)
+      .success(function(response){
+        angular.forEach(response.data.results, function(child){
+          $scope.comic.push(child);
+        });
+      }
+    );
+
+    $scope.backIndex = function() {
+      $location.path("/")
+    }
   }
-});
+]);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
