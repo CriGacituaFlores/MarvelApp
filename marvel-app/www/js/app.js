@@ -53,6 +53,9 @@ app.controller('MarvelDetail', [
     //url principal la cual servira para poder consumir la api
     var url_principal = ComicService.url_base + "/" + $scope.comicId + '?ts='+ ComicService.ts +'&apikey='+ ComicService.PUBLIC_KEY +'&hash='+ hash +''
     console.log(url_principal)
+
+    //PARA OBTENER EL COMIC ESPECIFICO
+
     $scope.comic = [];
 
     $http.get(url_principal)
@@ -62,6 +65,29 @@ app.controller('MarvelDetail', [
         });
       }
     );
+
+    //PARA OBTENER PERSONAJES DEL COMIC
+
+    $scope.characters = [];
+
+    $http.get('http://gateway.marvel.com/v1/public/comics/'+ $scope.comicId +'/characters' + '?ts=' + ComicService.ts + '&apikey=' + ComicService.PUBLIC_KEY + '&hash=' + hash)
+    .success(function(response){
+      angular.forEach(response.data.items, function(child){
+        $scope.characters.push(child)
+      })
+    })
+
+    //PARA OBTENER CREADORES DEL COMIC
+
+    $scope.creators = [];
+
+    $http.get('http://gateway.marvel.com/v1/public/comics/'+ $scope.comicId +'/creators' + '?ts=' + ComicService.ts + '&apikey=' + ComicService.PUBLIC_KEY + '&hash=' + hash)
+    .success(function(response){
+      angular.forEach(response.data.results, function(child){
+        $scope.creators.push(child)
+      })
+    })
+
 
     $scope.backIndex = function() {
       $location.path("/")

@@ -1,6 +1,13 @@
 <ion-pane>
   <ion-content class="cards-bg">
 	  <button class="btn btn-small btn-primary" ng-click="backIndex()">Volver</button>
-	  <p>{{comic.id}}</p>
+	  <input type="text" class="form-control" required name="first_name" ng-model="comic.id">
+	  <h2>Informacion del comic</h2>
+	  <p>{{comic[0].description}}</p>
+	  <h2>Informacion de personajes</h2>
+	  <p ng-if="characters.length > 0">Hay personajes</p>
+	  <h2>Informacion de creadores</h2>
+	  <p ng-if="creators.length > 0">Hay creadores</p>
+	  {{comic[0].prices[0].price}}
 	</ion-content>
 </ion-pane>
