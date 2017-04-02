@@ -92,6 +92,19 @@ app.controller('MarvelDetail', [
     $scope.backIndex = function() {
       $location.path("/")
     }
+
+    //PARA OBTENER URLS DEL COMIC
+
+    $scope.urls = [];
+
+    $http.get('http://gateway.marvel.com/v1/public/comics/' + $scope.comicId  + '?ts=' + ComicService.ts + '&apikey=' + ComicService.PUBLIC_KEY + '&hash=' + hash)
+    .success(function(response){
+      angular.forEach(response.data.results, function(child){
+        angular.forEach(child.urls, function(url){
+          $scope.urls.push(url)
+        })
+      })
+    })
   }
 ]);
 

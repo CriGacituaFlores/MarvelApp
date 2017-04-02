@@ -7,7 +7,14 @@
 	  <h2>Informacion de personajes</h2>
 	  <p ng-if="characters.length > 0">Hay personajes</p>
 	  <h2>Informacion de creadores</h2>
-	  <p ng-if="creators.length > 0">Hay creadores</p>
-	  {{comic[0].prices[0].price}}
+	  <div ng-repeat="creator in creators">
+	  	<p>{{creator.fullName}}</p>
+	  	<img ng-src="{{creator.thumbnail.path}}.{{creator.thumbnail.extension}}" alt="" height="242" width="242">
+	  </div>
+	  <h2>Informacion de Url</h2>
+	  <div ng-repeat="url in urls">
+		  {{url.type}}
+		  <a href="{{url.url}}" target="_blank"><p ng-show="url.type == 'detail'">VER DETALLES</p><p ng-show="url.type == 'purchase'">COMPRAR COMIC</p></a>
+		</div>
 	</ion-content>
 </ion-pane>
