@@ -3,12 +3,15 @@ var app = angular.module('myMarvel', ['ngRoute','ngResource','ionic','ionic-mate
 
 app.config(["$routeProvider",function($routeProvider){
 
-  $routeProvider.when("/",{
+  $routeProvider.when("/comics",{
     controller: "MarvelCtrl",
     templateUrl: "templates/marvel_index.html"
-  }).when("/:id",{
+  }).when("/comic/:id",{
     controller: "MarvelDetail",
     templateUrl: "templates/pages.html"
+  }).when("/",{
+    controller: "MarvelSlide",
+    templateUrl: "templates/slide.html"
   });
 
 }]);
@@ -20,6 +23,12 @@ app.factory('ComicService', function() {
        ts: new Date().getTime(),
        url_base: 'http://gateway.marvel.com:80/v1/public/comics'
   };
+});
+
+app.controller('MarvelSlide',function($scope,$location){
+  $scope.goHome = function(){
+    $location.path("/comics")
+  }
 });
 
 app.controller('MarvelCtrl', function($http,$scope,$location,ComicService){
@@ -38,7 +47,7 @@ app.controller('MarvelCtrl', function($http,$scope,$location,ComicService){
   );
 
   $scope.viewDetail = function(comic) {
-    $location.path("/" + comic.id)
+    $location.path("/comic/" + comic.id)
   }
 });
 
