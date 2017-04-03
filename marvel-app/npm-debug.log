@@ -7,7 +7,7 @@
 6 silly lifecycle marvel-app@1.1.1~prestart: no script for prestart, continuing
 7 info lifecycle marvel-app@1.1.1~start: marvel-app@1.1.1
 8 verbose lifecycle marvel-app@1.1.1~start: unsafe-perm in lifecycle true
-9 verbose lifecycle marvel-app@1.1.1~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/cristian/Escritorio/MarvelApp/marvel-app/node_modules/.bin:/home/cristian/.sdkman/candidates/java/current/bin:/home/cristian/.sdkman/candidates/gradle/current/bin:/home/cristian/.rvm/gems/ruby-2.3.0/bin:/home/cristian/.rvm/gems/ruby-2.3.0@global/bin:/home/cristian/.rvm/rubies/ruby-2.3.0/bin:/home/cristian/bin:/home/cristian/.local/bin:/home/cristian/bin:/home/cristian/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/cristian/.rvm/bin:/home/cristian/.rvm/bin
+9 verbose lifecycle marvel-app@1.1.1~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/cristian/Escritorio/MarvelApp/marvel-app/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 10 verbose lifecycle marvel-app@1.1.1~start: CWD: /home/cristian/Escritorio/MarvelApp/marvel-app
 11 silly lifecycle marvel-app@1.1.1~start: Args: [ '-c', 'node server.js' ]
 12 silly lifecycle marvel-app@1.1.1~start: Returned: code: 1  signal: null
