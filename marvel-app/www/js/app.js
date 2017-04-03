@@ -38,6 +38,11 @@ app.controller('MarvelCtrl', function($http,$scope,$location,ComicService){
   console.log(url_principal)
   $scope.comics = [];
 
+  //PARA RECONOCER SI EL OBJETO TRAE UNA IMAGEN, EN CASO DE QUE NO TRAIGA SE PONE UNA IMAGEN POR DEFECTO
+  $scope.getUrl = function(comic){
+    return comic.images[0] ? comic.images[0].path + '.' + comic.images[0].extension : "../img/not_found.jpg";
+  }
+
   $http.get(url_principal)
     .success(function(response){
       angular.forEach(response.data.results, function(child){
@@ -81,7 +86,8 @@ app.controller('MarvelDetail', [
 
     $http.get('http://gateway.marvel.com/v1/public/comics/'+ $scope.comicId +'/characters' + '?ts=' + ComicService.ts + '&apikey=' + ComicService.PUBLIC_KEY + '&hash=' + hash)
     .success(function(response){
-      angular.forEach(response.data.items, function(child){
+      angular.forEach(response.data.results, function(child){
+        console.log(child)
         $scope.characters.push(child)
       })
     })
@@ -99,7 +105,7 @@ app.controller('MarvelDetail', [
 
 
     $scope.backIndex = function() {
-      $location.path("/")
+      $location.path("/comics")
     }
 
     //PARA OBTENER URLS DEL COMIC

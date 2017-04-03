@@ -1,3 +1,4 @@
+<!--
 <ion-pane>
   <ion-content class="cards-bg">
 	  <button class="btn btn-small btn-primary" ng-click="backIndex()">Volver</button>
@@ -18,3 +19,48 @@
 		</div>
 	</ion-content>
 </ion-pane>
+-->
+
+<div class="">
+	<ion-view title="Page" id="page8" class="container">
+	  <ion-content padding="true" class="has-header">
+	    <div class="list card" id="page3-card22">
+	      <div class=" item item-image">
+	        <img ng-src="{{comic[0].thumbnail.path}}.{{comic[0].thumbnail.extension}}" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
+	      </div>
+	      <div class="item item-body" id="page3-list-item-container4">
+	        <div id="page3-markdown8" class="show-list-numbers-and-dots">
+	          <p style="margin-top:0px;color:#000000;">{{comic[0].title}}
+	          </p>
+	        </div>
+	      </div>
+	    </div>
+	    <div id="page3-markdown9" class="show-list-numbers-and-dots list card">
+	      <p style="color:#000000;">{{comic[0].description}}</p>
+	    </div>
+
+	    <!-- PERSONAJES -->
+
+	    <h3 id="page3-heading8" style="color:#000000;font-weight:400;text-align:center;" class="list card">Personajes</h3>
+	    <ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider5" delegate-handle="slider5" id="page3-slider5" style="width:100%;height:200px;">
+	      <ion-slide-page ng-repeat="character in characters" id="page3-slide219" style="background:url(&quot;{{character.thumbnail.path}}.{{character.thumbnail.extension}}&quot;) no-repeat center;background-size:cover;"><h1 style="color: #fff; font-weight: bold;">{{character.name}}</h1></ion-slide-page>
+	    </ion-slides>
+
+	    <!-- CREADORES -->
+
+	    <h3 id="page3-heading6" style="color:#000000;font-weight:400;text-align:center;" class="list card">Creadores</h3>
+	    <ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider2" delegate-handle="slider2" id="page3-slider2" style="width:100%;height:200px;">
+	      <ion-slide-page ng-repeat="creator in creators" id="page3-slide25" style="background:url(&quot;{{creator.thumbnail.path}}.{{creator.thumbnail.extension}}&quot;) no-repeat center;background-size:cover;"><h1 style="color: #fff; font-weight: bold;">{{creator.fullName}} </h1></ion-slide-page>
+	    </ion-slides>
+
+	    <!-- ENLACES -->
+
+	    <h3 id="page3-heading9" style="color:#000000;font-weight:400;text-align:center;" class="list card">Enlaces</h3>
+	    <ion-list id="page3-list3" ng-repeat="url in urls">
+	      <ion-item class="item-icon-left assertive" id="page3-list-item29">
+	        <a href="{{url.url}}"><i class="icon ion-link" style="cursor:pointer;"><input style="cursor:pointer;" type="text" name="lname" value="{{url.type == 'detail' ? 'Ver detalle del comic' : 'Comprar Comic'}}"></i>
+	      </ion-item>
+	    </ion-list>
+	  </ion-content>
+	</ion-view>
+</div>
